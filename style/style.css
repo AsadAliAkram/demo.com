@@ -1,17 +1,12 @@
 body {
 	margin: 0 auto;
 }
-
-a.menu-link,
-a.menu-anchor {
-   display: none;
+.header {
+    border: solid 2px #c0c0c0;
+    padding: 20px;
+    border-radius: 10px;
 }
-
-a.menu-link,
-a.menu-anchor {
-   display: block;
-}
-
-a.menu-anchor {
-   height:0;
+.manu {
+    font-size: 30px;
+    background: cadetblue;
 }

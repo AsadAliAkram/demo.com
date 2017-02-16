@@ -21,15 +21,17 @@ include_once ("CDN.php");
 <body>
 
 <div class="container">
+<div class="header">
+
   <div class="row">
   	
   	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-  	  <h2>LOGO</h2>
+  	  <h1>LOGO</h1>
   	</div>
 
   	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right">
   	  
-  	  <h2>Header Manue Navebar</h2>
+  	  <h2 class="manu">Header Manue Navebar</h2>
   	  
   	  <form mathod="post" action="signup.php">
   	    
@@ -47,7 +49,7 @@ include_once ("CDN.php");
   	</div>
 
   </div>
-
+</div>
 </div>
 
 
