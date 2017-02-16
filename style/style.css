@@ -1,0 +1,17 @@
+body {
+	margin: 0 auto;
+}
+
+a.menu-link,
+a.menu-anchor {
+   display: none;
+}
+
+a.menu-link,
+a.menu-anchor {
+   display: block;
+}
+
+a.menu-anchor {
+   height:0;
+}
