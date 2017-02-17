@@ -1,29 +1,105 @@
 <div class="header">
 
-  <div class="row">
-  	
-  	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-  	  <h1>LOGO</h1>
-  	</div>
+	<div class="row">
 
-  	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right">
-  	  
-  	  <h2 class="manu">Header Manue Navebar</h2>
-  	  
-  	  <form mathod="post" action="signup.php">
-  	    
-  	    <div>
-  	      <input name="mail" type="email" placeholder="Enter Your Email" required />
-  	      <input name="pas" type="password" placeholder="Enter Your Password" required />
-  	    </div>
 
-  	    <div>
-  	      <input name="submit" type="submit" value="SIGN IN">
-  	      <a class="btn" href="signup.php" target="_blank">SIGN UP</a>
-  	    </div>
-  	  </form>
-  	
-  	</div>
+		<nav id="head-t" class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>                        
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#">MY ACCOUNT</a></li>
+								<li><a href="#">MY WISHLIST</a></li>
+								<li><a href="#">LOG IN</a></li>
+							</ul>
+						</div>
+				</div>
+			</div>
+		</nav>  
+	</div>
 
-  </div>
+	<nav id="head-m" class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-5">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>                        
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav navbar-left">
+								<li><a href="#">MY ACCOUNT</a></li>
+								<li><a href="#">MY WISHLIST</a></li>
+								<li><a href="#">LOG IN</a></li>
+							</ul>
+						</div>
+					</div>
+
+
+					<div class="col-md-2">
+
+						<img src="img/logo.png">
+
+					</div>
+
+
+					<div class="col-md-5">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>                        
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#">MY ACCOUNT</a></li>
+								<li><a href="#">MY WISHLIST</a></li>
+								<li><a href="#">LOG IN</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</nav>  
+
+		<div class="row">
+
+
+		<nav id="head-t" class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>                        
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav navbar-centet">
+								<li><a href="#">MY ACCOUNT</a></li>
+								<li><a href="#">MY WISHLIST</a></li>
+								<li><a href="#">LOG IN</a></li>
+							</ul>
+						</div>
+				</div>
+			</div>
+		</nav>  
+	</div>
 </div>

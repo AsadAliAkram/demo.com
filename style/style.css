@@ -1,12 +1,16 @@
 body {
 	margin: 0 auto;
 }
-.header {
-    border: solid 2px #c0c0c0;
-    padding: 20px;
-    border-radius: 10px;
+#head-t {
+    background-color: #f7f7f7;
+    border-color: #f7f7f7;
 }
-.manu {
-    font-size: 30px;
-    background: cadetblue;
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #000000 !important;
+}
+.navbar-nav > li > a {
+	padding: 0px 0px 0px 10px !important;
+	margin: 10px !important;
+    border-left: 1px solid #9d9d9d !important;
+    font-size: 12px !important;
 }
