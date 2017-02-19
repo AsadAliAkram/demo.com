@@ -14,3 +14,115 @@ body {
     border-left: 1px solid #9d9d9d !important;
     font-size: 12px !important;
 }
+  ul.s-manu {
+  	display: none;
+      position: fixed;
+      border-top: 5px solid black;
+      border-right: solid 1px #c7c7c7;
+      border-left: solid 1px #c7c7c7;
+      border-bottom: solid 1px #c7c7c7;
+      margin: 0px 0px 0px 15px;
+      padding: 10px 10px 10px 10px;
+      width: 170px;
+      border-radius: 0px 7px 7px 20px;
+      z-index: 1;
+      background-color: #ffffff;
+  }
+  ul.s-manu li {
+      list-style: none;
+      padding: 3px 10px;
+  }
+  ul.s-manu li:hover {
+  	background-color: #c9c9c9;
+  }
+  ul.s-manu li a {
+  	text-decoration: none;
+  	color: #777;
+  }
+  li.dropdown:hover > ul.s-manu {
+  	display: block;
+  }
+.item img {
+  width: 100%
+}
+.slidr-side img {
+  width: 100%;
+  margin: 7px 0px;
+
+}
+input[type="search"] {
+    border: solid 1px #c7c7c7;
+    padding: 8px;
+    border-radius: 20px 0px 0px 20px;
+}
+select {
+    color: #888888;
+    padding: 8px;
+    border: solid 1px #cfcfcf;
+	background-color: #ffffff;
+}
+button {
+    padding: 8px;
+    background: none;
+    border: 1px solid #c7c7c7;
+    border-radius: 0px 20px 20px 0px;
+}
+.registr-form {
+      border-top: 5px solid black;
+      border-right: solid 1px #c7c7c7;
+      border-left: solid 1px #c7c7c7;
+      border-bottom: solid 1px #c7c7c7;
+      border-radius: 7px 7px 7px 7px;
+      background-color: #ffffff;
+      padding: 10px;
+      width: 100%;
+      float: left;
+}
+.sin-sup {
+    background-color: #484747;
+    padding: 8px;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    float: right;
+    margin: 10px 0px;
+	clear: both;
+	text-decoration: none;
+}
+
+.sin-sup:hover {
+	background-color:  #888787;
+	color: #f7f7f7;
+	text-decoration: none;
+}
+.registr-form input[type="email"] {
+    width: 100%;
+    padding: 5px;
+    margin: 10px 0px;
+}
+.registr-form input[type="password"] {
+   width: 100%;
+   padding: 5px;
+   margin: 10px 0px;
+}
+.sin-span {
+	color: red;
+	float: right;
+	clear: both;	
+}
+.registr-form input[type="text"] {
+   width: 100%;
+   padding: 5px;
+   margin: 10px 0px;
+}
+input.lgout {
+    background-color: #888787;
+    color: #ffffff;
+    border: solid 1px #888787;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 5em;
+    border-radius: 5px;
+    margin: 5px;
+}

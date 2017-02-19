@@ -1,67 +1,85 @@
-<?php
+  <?php
+  session_start();
+  include_once ("connection.php");
+  ?>
 
-include_once ("connection.php");
-
-
-
-?>
-
-<!DOCTYPE html >
-<html>
-<head>
-
-
-<title>DEMO | Sign Up</title>
-
-<?php
-include_once ("CDN.php");
-?>
-
-</head>
-<body>
-
-<div class="container">
-
-<?php
-include_once ("header.php");
-?>
-
-</div>
+  <!DOCTYPE html >
+  <html>
+  <head>
+    <title>DEMO | Sign In</title>
+    <?php
+    include_once ("CDN.php");
+    ?>
+  </head>
 
 
+  <body>
+    <div class="container">
+      <?php
+      include_once ("header.php");
+      ?>
+    </div>
+
+
+    <?php
+    if (isset($_POST['signup'])) {
+
+
+      $fname = $_POST['fname'];
+      $lname = $_POST['lname'];
+      $mname = $_POST['mname'];
+      $mail = $_POST['mail'];
+      $pass = $_POST['pass'];
+
+
+
+      $sql = "INSERT INTO signup (uid, ufname, ulname, umname, umail, upass, ucat) VALUE 
+      ('NULL','$fname','$lname','$mname','$mail','$pass','1')"; 
+      $var = mysqli_query($conn, $sql);
+
+    }
+    ?>
 
 
 
 
-<div class="container">
-  
-   <div class="row">
-  	
-  	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-  	  
-  	  <h2>Sigan Up Form</h2>
-  	  
-  	  <form mathod="post">
-  	    
-  	    <div>
-  	      <input name="fname" type="text" placeholder="Enter First Name" require />
-  	      <input name="lname" type="text" placeholder="Enter Last Name" require />
-  	      <input name="mail" type="email" placeholder="Enter Your Email" required />
-  	      <input name="pas" type="password" placeholder="Enter Your Password" required />
 
-  	    </div>
+    <div class="container">
+      <h3>Create an Account</h3>
+      <div class="registr-form">
+       <h4>PERSONAL INFORMATION</h4>
+       <form method="post" action="">     
+        <div class="row">      
+          <div class="col-lg-2 col-md-2">
+            <label>First Name<span class="sin-span">*</span></label><br />
+            <input name="fname" type="text" /><br />
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label>Last Name<span class="sin-span">*</span></label><br />
+            <input name="lname" type="text" />
+          </div>
+          <div class="col-lg-2 col-md-2">
+          </div>
+          <div class="col-lg-2 col-md-2">
+            <label>Middle Name<span class="sin-span">*</span></label><br />
+            <input name="mname" type="text" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Email Adress<span class="sin-span">*</span></label><br />
+            <input name = "mail" type="email" />
+          </div>
+          <div class="col-md-6">
+            <label>Password<span class="sin-span">*</span></label><br />
+            <input name = "pass" type="password" />
+          </div>
+        </div>
 
-  	    <div>
-  	      <input name="submit" type="submit" value="SUBMIT" />
-  	    </div>
-
-  	  </form>
-  	
-  	</div>
-
+          <span class="sin-span">* requitred fields</span><br />
+          <input name="signup" type="submit" class="sin-sup" value="Submit">
+      </form>
+    </div>
   </div>
-
-</div>
-
 </body>
 </html>
