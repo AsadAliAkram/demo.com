@@ -34,17 +34,21 @@ if (isset($_POST["signin"])) {
 
   while ($row = mysqli_fetch_array($result)) {
 
-    if ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == 1) {
-         
 
-         
-      header('Location: user.php');
+
+    if ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == '0') {
+        
+    $url='admin.php';
+    echo '<script>window.location = "'.$url.'";</script>';
+    die;
        
-    } elseif ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == 0) {
+    } elseif ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == '1') {
          
 
           
-      header('Location: admin.php');
+    $url='user.php';
+    echo '<script>window.location = "'.$url.'";</script>';
+    die;
         
     }
       
