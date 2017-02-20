@@ -31,8 +31,6 @@
       $mail = $_POST['mail'];
       $pass = $_POST['pass'];
 
-
-
       $sql = "INSERT INTO signup (uid, ufname, ulname, umname, umail, upass, ucat) VALUE 
       ('NULL','$fname','$lname','$mname','$mail','$pass','1')"; 
       $var = mysqli_query($conn, $sql);
