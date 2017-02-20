@@ -1,8 +1,27 @@
-  <?php
-  session_start();
-  include_once ("connection.php");
-  ?>
+<?php
+session_start();
+include_once ("connection.php");
+?>
 
+<?php
+ if ($_SESSION['u_cat'] == NULL) {
+  $url='index.php';
+  echo '<script>window.location = "'.$url.'";</script>';
+  die;  
+} 
+?>
+
+<?php
+if (isset($_POST['signout'])){
+
+session_unset(); 
+session_destroy(); 
+
+  $url='index.php';
+  echo '<script>window.location = "'.$url.'";</script>';
+  die;  
+}
+?>
   <!DOCTYPE html >
   <html>
   <head>
@@ -31,11 +50,13 @@
                 </button>
               </div>
               <div class="collapse navbar-collapse" id="myNavbar">
+                <form method="post" action="">
                 <ul class="nav navbar-nav navbar-right">
                   <li><a href="#">MY ACCOUNT</a></li>
                   <li><a href="#">MY WISHLIST</a></li>
                   <li><input name="signout" type="submit" class="lgout" value="LOG OUT" /></li>
                 </ul>
+                </form>
               </div>
           </div>
         </div>
@@ -53,7 +74,7 @@
           </div>
           <div class="collapse navbar-collapse" id="my1Navbar">
             
-            <form>
+            <form >
             <ul class="nav navbar-nav navbar-left">
               <li><input name="srch" type="search" placeholder="Search..."/></li>
               <li><select>
@@ -74,7 +95,7 @@
 
 
       <div class="col-xs-2">
-      <img src="img/logo.png" alt=" logo image Did't Load">
+      <a href="index.php"></a><img src="img/logo.png" alt=" logo image Did't Load"></a>
       </div>
 
 

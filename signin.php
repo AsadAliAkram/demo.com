@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once ("connection.php");
 ?>
 
@@ -21,40 +21,52 @@ include_once ("CDN.php");
 <?php
 include_once ("header.php");
 ?>
+
 </div>
+
 <?php
 if (isset($_POST["signin"])) {
- 
+
   $mail = $_POST['mail'];
   $pass = $_POST['pass'];
-
-  $sql = "SELECT * FROM signup";
-      
+  
+  $sql = "SELECT * FROM signup";     
+  
   $result = mysqli_query($conn, $sql);
-
   while ($row = mysqli_fetch_array($result)) {
 
 
 
     if ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == '0') {
-        
-    $url='admin.php';
-    echo '<script>window.location = "'.$url.'";</script>';
-    die;
-       
-    } elseif ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == '1') {
-         
+      $_SESSION['u_cat'] = $mail;
 
-          
-    $url='user.php';
-    echo '<script>window.location = "'.$url.'";</script>';
-    die;
-        
-    }
+
+      $url='admin.php';
+      echo '<script>window.location = "'.$url.'";</script>';
+      die;
+
+    } elseif ($row['umail'] == $mail AND $row['upass'] == $pass AND $row['ucat'] == '1') {
+      $_SESSION['u_cat'] = $mail;
+
       
+      $url='user.php';
+
+      echo '<script>window.location = "'.$url.'";</script>';
+      die;  
+
+    }
+
+
+
+
+
+
+
+
   }
 }
 ?>
+
 <div class="container">
   <h3>Login or Create an Account</h3>
   <div class="registr-form">
