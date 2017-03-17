@@ -1,4 +1,3 @@
-<div class="row">
 	<nav id="head-t" class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">
@@ -17,7 +16,6 @@
 			</div>
 		</div>
 	</nav>  
-</div>
 <div class="container">
 	<div class="header">
 		<div class="row">
@@ -59,7 +57,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#"><span class="glyphicon glyphicon-comment"></span></a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-heart"></span></a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+						<li><a href="cart-page.php"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 					</ul>
 				</div>
 			</nav>
@@ -76,9 +74,9 @@
 			</div>
 			<div class="collapse navbar-collapse" id="mymNavbar">
 				<ul class="nav navbar-nav  text-center">
-					<li class="dropdown"><a class="dropdown-toggle"href="#">Page 1 <span class="caret"></span></a>
+					<li class="dropdown"><a class="dropdown-toggle"href="#">PRODUCTS<span class="caret"></span></a>
 						<ul class="s-manu">
-							<li><a href="#">Page 1-1</a></li>
+							<li><a href="product.php">ALL PRODUCTS</a></li>
 							<li><a href="#">Page 1-2</a></li>
 							<li><a href="#">Page 1-3</a></li>
 						</ul>

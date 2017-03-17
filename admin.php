@@ -1,10 +1,11 @@
 <?php
 session_start();
 include_once ("connection.php");
+$aid = $_SESSION['u_id'];
 ?>
 
 <?php
- if ($_SESSION['u_cat'] == NULL) {
+if ($_SESSION['u_cat'] == NULL) {
   $url='index.php';
   echo '<script>window.location = "'.$url.'";</script>';
   die;  
@@ -22,160 +23,107 @@ session_destroy();
   die;  
 }
 ?>
-  <!DOCTYPE html >
-  <html>
-  <head>
-    <title>DEMO | U Dash Bord</title>
-    <?php
-    include_once ("CDN.php");
-    ?>
-  </head>
+
+<!DOCTYPE html >
+<html>
+<head>
+  <title>DEMO | A Dash Bord</title>
+  <?php
+  include_once ("CDN.php");
+  ?>
+</head>
+<body>
 
 
-  <body>
-  
-  <div class="container">
-    <div class="header">
-    <div class="row">
-
-
-      <nav id="head-t" class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="container">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>                        
-                </button>
-              </div>
-              <div class="collapse navbar-collapse" id="myNavbar">
-                <form method="post" action="">
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">MY ACCOUNT</a></li>
-                  <li><a href="#">MY WISHLIST</a></li>
-                  <li><input name="signout" type="submit" class="lgout" value="LOG OUT" /></li>
-                </ul>
-                </form>
-              </div>
-          </div>
-        </div>
-      </nav>  
-    </div>
-
+<?php
+  include_once ("header-admin.php");
+?>
+   
+<div class="container">
       <div class="row">
-      <div class="col-xs-5">
-      <nav class="navbar navbar-default" style="background:none; border:none"> 
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my1Navbar">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="my1Navbar">
-            
-            <form >
-            <ul class="nav navbar-nav navbar-left">
-              <li><input name="srch" type="search" placeholder="Search..."/></li>
-              <li><select>
-                    <option>All Categories</option>
-                    <option>Categoyy</option>
-                    <option>Categoyy</option>
-                    <option>Categoyy</option>
-                </select>
-              </li>
-              <li><button type="button" class="btn-srch" ><span class="glyphicon glyphicon-search"></span></button></li>
-            </ul>
-            </form>
+        <div class="col-sm-6">
+          <?php
           
-          </div>
+          $sql = "SELECT * FROM signup WHERE uid = '$aid'";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_array($result)) {
+            $fname = $row['ufname'];
+            $lname = $row['ulname'];
+            ?>
 
-      </nav>
+            <h4><?php echo $fname." ".$lname; ?></h4>
+            <?php
+          }
+          ?>
+        </div>
+        <div class="col-sm-6">
+         
+        </div>
       </div>
 
 
-      <div class="col-xs-2">
-      <a href="index.php"></a><img src="img/logo.png" alt=" logo image Did't Load"></a>
+      <div class="registr-form">
+        <div class="row">
+          <center><h2>Products</h2></center><hr> 
+          <?php
+          $aid = $_SESSION['u_id'];
+          $cat = $_SESSION['u_cat'];
+            if ($cat == 2) {
+            $sql = "SELECT * FROM products";
+          }elseif ($cat == 0) {
+            $sql = "SELECT * FROM products WHERE pownid = '$aid' ";
+          }
+
+
+          
+
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_array($result)) {
+            ?>
+            <div class="col-sm-3"  style="margin-bottom:50px">
+              <div style="height:350px">
+              <?php
+              $dprice = $row['prealprice']*(90/100) ;
+              ?>
+              <center><a href="product-user.php?pid=<?php echo $row["pid"];?>"><img style='width:190px; ' src='<?php echo "images/" . $row['pimage']?>' /></a></center>
+              <center><h3><?php echo $row['pname']; ?></h3></center>
+              <center><p><?php echo  $row['pdiscription']; ?></p></center>
+              <center><del><p><?php echo  $row['prealprice']."/= Rs"; ?></p></del></center>
+              <center><p><?php echo  $dprice."/= Rs"; ?></p></center>
+              </div>
+                <?php
+                    $did = '';
+                  if (isset($_GET['did'])) {
+                     $did = $_GET['did'];
+                     if ($did == 'delet') {
+                      $pid = $_GET['pid'];
+                     $sqle = "DELETE FROM products WHERE pid=$pid";
+                     mysqli_query($conn, $sqle);
+                     }
+                   } 
+                   ?>
+                <?php
+                if ($cat == 2) {
+                    ?>  
+                 <center> <a href="admin.php?did=delet&pid=<?php echo $row['pid'];?>" class="btn btn-danger" >DELETE</a></center>
+
+               <?php } ?>
+            </div>
+            <?php
+          }
+          ?>
+        </div>
+
+        <a href="create-product.php" class="btn btn-default"><h4>Create Product</h4></a>
+
       </div>
 
-
-      <div class="col-xs-5">
-      <nav class="navbar navbar-default" style="background:none; border:none">
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle">
-              <span class="glyphicon glyphicon-shopping-cart"></span>
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="my2Navbar">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-comment"></span></a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-heart"></span></a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-            </ul>
-          </div>
-
-      </nav>
-      </div>
-      </div>
-
-      <div class="row">
-
-      <nav class="navbar navbar-default" style="background:none; border:none;" >
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mymNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span> 
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="mymNavbar">
-          <ul class="nav navbar-nav  text-center">
-
-            <li class="dropdown"><a class="dropdown-toggle"href="#">Page 1 <span class="caret"></span></a>
-              <ul class="s-manu">
-                <li><a href="#">Page 1-1</a></li>
-                <li><a href="#">Page 1-2</a></li>
-                <li><a href="#">Page 1-3</a></li>
-              </ul>
-            </li>
-
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Page 2</a></li>
-
-            <li class="dropdown"><a class="dropdown-toggle"href="#">Page 1 <span class="caret"></span></a>
-              <ul class="s-manu">
-                <li><a href="#">Page 1-1</a></li>
-                <li><a href="#">Page 1-2</a></li>
-                <li><a href="#">Page 1-3</a></li>
-              </ul>
-            </li>
-
-            <li><a href="#">Page 3</a></li>
-            <li><a href="#">Page 3</a></li>
-            <li><a href="#">Page 3</a></li>
-          </ul>
-
-          </div>
-      </nav>
-      </div>
-
-
-
-  </div>
-  </div>
+  
 
 
 
 
 
-
-
-
-    <div class="container">
-      <h3>User Admin Dashbord</h3>
-      
-  </div>
+    </div>
 </body>
 </html>

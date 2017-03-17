@@ -116,6 +116,16 @@ button {
    padding: 5px;
    margin: 10px 0px;
 }
+.registr-form input[type="number"] {
+   width: 100%;
+   padding: 5px;
+   margin: 10px 0px;
+}
+.registr-form select {
+   width: 100%;
+   padding: 5px;
+   margin: 10px 0px;
+}
 input.lgout {
     background-color: #888787;
     color: #ffffff;
@@ -125,4 +135,27 @@ input.lgout {
     font-weight: 5em;
     border-radius: 5px;
     margin: 5px;
+}
+.pro-btn {
+    background-color: #484747;
+    padding: 8px;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    margin: 10px 0px;
+}
+.review {
+    margin: 20px;
+    border: solid 1px black;
+    padding: 10px 10px 5px;
+    border-radius: 10px;
+}
+.foot {
+  background-color: #121214 !important;
+}
+.foot ul li {
+
+  list-style: none;
+  text-decoration: none;
 }

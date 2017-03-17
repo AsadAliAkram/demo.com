@@ -37,149 +37,151 @@ session_destroy();
 
   <body>
   
-  <div class="container">
-    <div class="header">
-    <div class="row">
+<?php
+  include_once ("header-admin.php");
+?>
+  <?php
+  if (isset($_POST['add-to-cart'])) {
+    if (isset($_SESSION['shoping-cart'])) {
+      $item_array_id = array_column($_SESSION['shoping-cart'], "item_id");
+      if (!in_array($_GET['id'] , $item_array_id)) {
+
+        $count = count($_SESSION['shoping-cart']);
+        $item_array = array (
+          'item_id'     =>  $_GET['id'],
+          'item_image'  =>  $_POST['hidden-image'],
+          'item_name'     =>  $_POST['hidden-name'],
+          'item_price'    =>  $_POST['hidden-price'],
+          'item_quantity' =>  $_POST['quantity'],
+          );
+        $_SESSION['shoping-cart'][$count] = $item_array;
+        }
+      } 
+      else {
+        echo '<script>alert("item already added")</script>';
+        echo '<script>window.location="index.php"</script>';
+      }
+    }
+    else {
+      $item_array = array (
+        'item_id'     =>  $_GET['id'],
+        'item_image'  =>  $_POST['hidden-image'],
+        'item_name'   =>  $_POST['hidden-name'],
+        'item_price'    =>  $_POST['hidden-price'],
+        'item_quantity' =>  $_POST['quantity'],
+        );
+      $_SESSION['shoping-cart'][0] = $item_array;
+    }
+    ?>
 
 
-      <nav id="head-t" class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="container">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>                        
-                </button>
-              </div>
-              <div class="collapse navbar-collapse" id="myNavbar">
-                <form method="post" action="">
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="#">MY ACCOUNT</a></li>
-                  <li><a href="#">MY WISHLIST</a></li>
-                  <li><input name="signout" type="submit" class="lgout" value="LOG OUT" /></li>
-                </ul>
-              </form>
-              </div>
-          </div>
+<div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <?php
+          $aid = $_SESSION['u_id'];
+          $sql = "SELECT * FROM signup WHERE uid = '$aid'";
+          $result = mysqli_query($conn, $sql);
+          while ($row = mysqli_fetch_array($result)) {
+            $fname = $row['ufname'];
+            $lname = $row['ulname'];
+            ?>
+
+            <h4><?php echo $fname." ".$lname; ?></h4>
+            <?php
+          }
+          ?>
         </div>
-      </nav>  
-    </div>
-
-      <div class="row">
-      <div class="col-xs-5">
-      <nav class="navbar navbar-default" style="background:none; border:none"> 
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my1Navbar">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="my1Navbar">
-            
-            <form>
-            <ul class="nav navbar-nav navbar-left">
-              <li><input name="srch" type="search" placeholder="Search..."/></li>
-              <li><select>
-                    <option>All Categories</option>
-                    <option>Categoyy</option>
-                    <option>Categoyy</option>
-                    <option>Categoyy</option>
-                </select>
-              </li>
-              <li><button type="button" class="btn-srch" ><span class="glyphicon glyphicon-search"></span></button></li>
-            </ul>
-            </form>
+        <div class="col-sm-6">
           
-          </div>
+        </div>
+      </div>
 
-      </nav>
+      <div class="registr-form">
+        <div class="row">
+          <center><h2>Products</h2></center><hr>
+          <?php
+          $sql = "SELECT * FROM products";
+          $result = mysqli_query($conn, $sql);
+          $total = mysqli_num_rows($result);
+          $start = 0;
+          $limit = 4;
+          if (isset($_GET['nid'])) {
+            $id = $_GET['nid'];
+            $start = ($id-1)*$limit;
+          } else {
+            $id = 1;
+          }
+          $page = ceil($total/$limit);
+          $sqli = mysqli_query($conn, "SELECT * FROM products WHERE pquantity > '0' LIMIT $start, $limit"); 
+          if (mysqli_num_rows($sqli) > 0) {
+            while ($row = mysqli_fetch_array($sqli)) {
+              ?>
+              <div class="col-sm-3" style="padding: 50px 0px">
+              
+                <form method="post" action="user.php?action=add&id=<?php echo $row['pid']; ?>">
+                  <div style="height:230px">
+                    <center><a href="all-products.php?pid=<?php echo $row["pid"];?>"><img style='width:190px;' src='<?php echo "images/" . $row['pimage']?>' /></a></center>
+                  </div>
+                  <center><h4><?php echo $row['pname']; ?></h4></center>
+                  <center><h4><?php echo $row['pdiscription']; ?></h4></center>
+                  <center><h4> $ <?php echo $row['prealprice']; ?></h4></center>
+                  <center>
+                    <div class="row" style="padding: 0px 30px">
+                      <div class="col-sm-4"><h4 style="padding: 10px">Quantity:</h4></div> <div class="col-sm-8"><input name="quantity" type="number" value="1"></div>
+                    </div>
+                  </center>
+                  <input type="hidden" name="hidden-image" value="<?php echo "images/" . $row['pimage']?>">
+                  <input type="hidden" name="hidden-name" value="<?php echo $row['pname']; ?>">
+                  <input type="hidden" name="hidden-price" value="<?php echo $row['prealprice']; ?>">
+                  <center><input type="submit" name="add-to-cart" class="btn btn-success" value="Add to Cart"></center>
+                </form> 
+              </div>
+              <?php 
+            }
+          }
+          ?>
+        </div>
       </div>
 
 
-      <div class="col-xs-2">
-      <a href="index.php"><img src="img/logo.png" alt=" logo image Did't Load"></a>
-      </div>
-
-
-      <div class="col-xs-5">
-      <nav class="navbar navbar-default" style="background:none; border:none">
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle">
-              <span class="glyphicon glyphicon-shopping-cart"></span>
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="my2Navbar">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-comment"></span></a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-heart"></span></a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-            </ul>
-          </div>
-
-      </nav>
-      </div>
-      </div>
-
-      <div class="row">
-
-      <nav class="navbar navbar-default" style="background:none; border:none;" >
-
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mymNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span> 
-            </button>
-          </div>
-          <div class="collapse navbar-collapse" id="mymNavbar">
-          <ul class="nav navbar-nav  text-center">
-
-            <li class="dropdown"><a class="dropdown-toggle"href="#">Page 1 <span class="caret"></span></a>
-              <ul class="s-manu">
-                <li><a href="#">Page 1-1</a></li>
-                <li><a href="#">Page 1-2</a></li>
-                <li><a href="#">Page 1-3</a></li>
-              </ul>
-            </li>
-
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Page 2</a></li>
-
-            <li class="dropdown"><a class="dropdown-toggle"href="#">Page 1 <span class="caret"></span></a>
-              <ul class="s-manu">
-                <li><a href="#">Page 1-1</a></li>
-                <li><a href="#">Page 1-2</a></li>
-                <li><a href="#">Page 1-3</a></li>
-              </ul>
-            </li>
-
-            <li><a href="#">Page 3</a></li>
-            <li><a href="#">Page 3</a></li>
-            <li><a href="#">Page 3</a></li>
+      <ul class="pagination">
+        <?php
+        if ($id > 1) {
+          ?>
+          <li><a href="?nid=<?php echo ($id-1) ;?>">Previous</a></li>
+          <?php } ?>
+          <?php
+          for($i=1 ; $i <= $page ; $i++)
+            { ?>    
+          <li><a href="?nid=<?php echo $i ;?>"><?php echo $i; ?></a></li>
+          <?php } ?>
+          <?php
+          if ($id != $page) {
+            ?>
+            <li><a href="?nid=<?php echo ($id+1) ;?>">Next</a></li>
+            <?php } ?>
           </ul>
+          <?php
+          if (isset($_SESSION['u_id'])) {
+             ?>
+          <a href="cart-page.php" class="btn btn-default">View Cart<span class='glyphicon glyphicon-shopping-cart'></span></p></script></a>
+          <?php
+        }  else {
+          ?>
+          <a href="signin.php" class="btn btn-default">View Cart<span class='glyphicon glyphicon-shopping-cart'></span></p></script></a>
+          <?php
+        }
+        ?>
+<!-- <form method="post" action="cart-page.php">
+<input type="submit" name="checkout"value="CHECK OUT<span class='glyphicon glyphicon-shopping-cart'></span>" onclick="this.form.target='_blank';return true;">
 
-          </div>
-      </nav>
-      </div>
+</form> -->
 
-
-
-  </div>
-  </div>
-
-
-
-
-
-
-
-
-    <div class="container">
-      <h3>User <?php echo $_SESSION['u_cat']; var_dump($_SESSION['u_cat']); ?> Dashbord</h3>
-
-      
-  </div>
+    </div>
 </body>
 </html>
+
+
+
+  
